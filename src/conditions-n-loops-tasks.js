@@ -21,8 +21,10 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number < 0) return false;
+
+  return true;
 }
 
 /**
@@ -38,8 +40,11 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  if (a > b && a > c) return a;
+  if (b > a && b > c) return b;
+
+  return c;
 }
 
 /**
@@ -60,8 +65,12 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x) return true;
+  if (queen.y === king.y) return true;
+  if (Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)) return true;
+
+  return false;
 }
 
 /**
@@ -82,8 +91,12 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (!a || !b || !c) return false;
+  if (a + b < c || a + c < b || b + c < a) return false;
+  if (a !== b && a !== c && b !== c) return false;
+
+  return true;
 }
 
 /**
@@ -100,8 +113,37 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let secondPart = 0;
+  secondPart = num % 10;
+  const firsPart = num - secondPart < 0 ? 0 : (num - secondPart) / 10;
+  let answer = '';
+  const one = 'I';
+  const five = 'V';
+  const ten = 'X';
+
+  if (firsPart > 0) {
+    for (let i = 1; i <= firsPart; i += 1) {
+      answer += ten;
+    }
+  }
+
+  if (secondPart < 4) {
+    for (let i = 1; i <= secondPart; i += 1) {
+      answer += one;
+    }
+  } else if (secondPart === 4) {
+    answer += one + five;
+  } else if (secondPart > 4 && secondPart < 9) {
+    answer += five;
+    for (let i = 1; i <= secondPart - 5; i += 1) {
+      answer += one;
+    }
+  } else if (secondPart === 9) {
+    answer += one + ten;
+  }
+
+  return answer;
 }
 
 /**
